@@ -12,7 +12,7 @@ import {PasswordHasher} from '../../services/hash.password.bcryptjs';
 import {PasswordHasherBindings} from '../../keys';
 import {User} from '../../models';
 
-describe.only('authorization', () => {
+describe('authorization', () => {
   let app: ShoppingApplication;
   let client: Client;
   const mongodbDS = new MongoDataSource();
@@ -35,12 +35,20 @@ describe.only('authorization', () => {
   before(migrateSchema);
   before(createPasswordHasher);
 
-  beforeEach(clearDatabase);
+  beforeEach(async function() {
+    this.timeout(30000);
+    // await clearDatabase();
+  });
   after(async () => {
     await app.stop();
   });
 
   describe('customer_service', () => {
+
+    beforeEach(async function() {
+      this.timeout(30000);
+    });
+
     it('allows customer_service create orders', async () => {
       newUser = await createAUser();
       const orderObj = {

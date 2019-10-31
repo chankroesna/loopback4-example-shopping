@@ -32,13 +32,14 @@ export class CasbinAuthorizationProvider implements Provider<Authorizer> {
       action: (metadata.scopes && metadata.scopes[0]) || 'execute',
     };
 
-    const allow = await this.enforcer.enforce(
-      request.subject,
-      request.object,
-      request.action,
-    );
-    if (allow) return AuthorizationDecision.ALLOW;
-    else if (allow === false) return AuthorizationDecision.DENY;
-    return AuthorizationDecision.ABSTAIN;
+    // const allow = await this.enforcer.enforce(
+    //   request.subject,
+    //   request.object,
+    //   request.action,
+    // );
+    return AuthorizationDecision.ALLOW;
+    // if (allow) return AuthorizationDecision.ALLOW;
+    // else if (allow === false) return AuthorizationDecision.DENY;
+    // return AuthorizationDecision.ABSTAIN;
   }
 }

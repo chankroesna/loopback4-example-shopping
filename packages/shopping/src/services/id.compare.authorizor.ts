@@ -1,6 +1,6 @@
 import {AuthorizationContext, AuthorizationMetadata, AuthorizationRequest, AuthorizationDecision} from '@loopback/authorization';
 import * as _ from 'lodash';
-import { UserProfile } from '@loopback/authentication';
+import { UserProfile, securityId } from '@loopback/security';
 
 interface MyAuthorizationMetadata extends AuthorizationMetadata {
   currentUser?: UserProfile,
@@ -15,7 +15,8 @@ export async function compareId(
 ) {
   let currentUser: UserProfile;
   if (authorizationCtx.principals.length > 0) {
-    currentUser = _.pick(authorizationCtx.principals[0], ['id', 'name', 'email']);
+    let user = _.pick(authorizationCtx.principals[0], ['id', 'name', 'email']);
+    currentUser = { [securityId]: user.id, name: user.name, email: user.email };
   } else {
     return AuthorizationDecision.DENY;
   }
