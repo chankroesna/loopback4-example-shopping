@@ -1,12 +1,10 @@
 {
-  "name": "mongo",
-  "connector": "mongodb",
+  "name": "dbExShopping",
+  "connector": "mysql",
   "url": "",
-  "host": "127.0.0.1",
-  "port": 27017,
-  "user": "",
-  "password": "",
-  "database": "",
-  "useNewUrlParser": true,
-  "useUnifiedTopology": true
+  "host": "165.22.103.5",
+  "port": 3306,
+  "user": "root",
+  "password": "Sokchea@2505",
+  "database": "dbExShopping"
 }
